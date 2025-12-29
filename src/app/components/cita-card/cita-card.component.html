@@ -1,3 +1,17 @@
-<p>
-  cita-card works!
-</p>
+<ion-card mode="ios">
+  <ion-item lines="none">
+    <ion-label class="ion-text-wrap">
+      <p class="frase-estilo">"{{ cita.frase }}"</p>
+      <ion-note slot="end" color="medium">— {{ cita.autor }}</ion-note>
+    </ion-label>
+    
+    <ion-button 
+      *ngIf="puedeBorrar" 
+      slot="end" 
+      fill="clear" 
+      color="danger" 
+      (click)="onEliminar()">
+      <ion-icon name="trash-outline" slot="icon-only"></ion-icon>
+    </ion-button>
+  </ion-item>
+</ion-card>

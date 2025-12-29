@@ -1,20 +1,27 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonContent, IonHeader, IonTitle, IonToolbar } from '@ionic/angular/standalone';
+import { IonicModule } from '@ionic/angular';
+import { ConfiguracionService } from 'src/app/services/configuracion';
 
 @Component({
   selector: 'app-configuracion',
   templateUrl: './configuracion.page.html',
-  styleUrls: ['./configuracion.page.scss'],
   standalone: true,
-  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule]
+  imports: [IonicModule, CommonModule, FormsModule]
 })
 export class ConfiguracionPage implements OnInit {
+  permiteBorrar: boolean = false;
 
-  constructor() { }
+  constructor(private configService: ConfiguracionService) {}
 
-  ngOnInit() {
+  async ngOnInit() {
+    // INDICADOR: Integra el Service para recuperar datos 
+    this.permiteBorrar = await this.configService.obtenerConfiguracionBorrado();
   }
 
+  async actualizarAjuste() {
+    // INDICADOR: Garantiza que la información se mantenga al cerrar la app [cite: 56]
+    await this.configService.guardarConfiguracionBorrado(this.permiteBorrar);
+  }
 }
