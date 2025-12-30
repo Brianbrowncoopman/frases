@@ -18,9 +18,9 @@ export class CitaCardComponent  implements OnInit {
 
   @Output() borrarCita = new EventEmitter<void>();
 
-  notificarBorrado(){
+  /*notificarBorrado(){
     this.borrarCita.emit();
-  }
+  }*/
 
   constructor() { }
 

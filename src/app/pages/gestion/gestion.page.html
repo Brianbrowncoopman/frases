@@ -15,7 +15,7 @@
       </ion-card-title>
     </ion-card-header>
     <ion-card-content>
-      <form [formGroup]="citaForm" (ngSubmit)="agregarCita()">
+      <form [formGroup]="citaForm" (ngSubmit)="agregarCitas()">
         <ion-item lines="full">
           <ion-label position="stacked">Cita</ion-label>
           <ion-input formControlName="frase" placeholder="Escriba la frase aquí"></ion-input>
@@ -44,7 +44,7 @@
       *ngFor="let c of citas" 
       [cita]="c" 
       [puedeBorrar] = "true"
-      (borrarCita)="eliminar(c.id!)">
+      (borrarCita)="eliminarCita(c.id!)">
     </app-cita-card>
   </ion-list>
 </ion-content>

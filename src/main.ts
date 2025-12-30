@@ -5,6 +5,16 @@ import { IonicRouteStrategy, provideIonicAngular } from '@ionic/angular/standalo
 import { routes } from './app/app.routes';
 import { AppComponent } from './app/app.component';
 
+import { defineCustomElements as jeepSqlite } from 'jeep-sqlite/loader';
+import { Capacitor } from '@capacitor/core';
+
+if(Capacitor.getPlatform() === 'web') {
+  jeepSqlite(window);
+
+  const jeepEl = document.createElement('jeep-sqlite');
+  document.body.appendChild(jeepEl);
+}
+
 bootstrapApplication(AppComponent, {
   providers: [
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },

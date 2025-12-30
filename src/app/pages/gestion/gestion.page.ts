@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
 import { FormBuilder,  FormsModule, ReactiveFormsModule, FormGroup, FormControl, Validators } from '@angular/forms';
-import { CitaService } from 'src/app/services/cita';
+import { CitaService } from 'src/app/services/cita.service';
 import { Cita } from 'src/app/models/cita.model';
 import { CitaCardComponent } from 'src/app/components/cita-card/cita-card.component'; 
 import { IonContent, IonHeader, IonTitle, IonToolbar } from '@ionic/angular/standalone';
@@ -39,11 +39,11 @@ export class GestionPage implements OnInit {
     this.listar()
   }
 
-  listar() {
-    this.citas = this.citaService.getCitas(); 
+  async listar() {
+    this.citas = await this.citaService.getCitas(); 
   }
 
-  agregarCita() {
+  agregarCitas() {
     if (this.citaForm.valid){
       const nuevaCita: Cita = this.citaForm.value;
       this.citas.push(nuevaCita);
@@ -51,14 +51,18 @@ export class GestionPage implements OnInit {
     }
   }
 
-  actualizarLista(){
-    this.citas = this.citaService.getCitas()
+  async actualizarLista(){
+    this.citas = await this.citaService.getCitas()
   }
 
-  eliminar(id: number) {
+  /*eliminarCita(id: number) {
     this.citaService.eliminarCitas(id);
-    /*this.listar();*/
+    
     this.actualizarLista();
+  }*/
+  async eliminarCita(id: number) {
+    await this.citaService.eliminarCita(id);
+    this.listar();
   }
 
 }
