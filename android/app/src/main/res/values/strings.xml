@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">citasapp</string>
+    <string name="title_activity_main">citasapp</string>
+    <string name="package_name">ionic.citasapp</string>
+    <string name="custom_url_scheme">ionic.citasapp</string>
+</resources>

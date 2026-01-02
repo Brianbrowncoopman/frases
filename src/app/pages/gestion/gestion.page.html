@@ -11,7 +11,7 @@
   <ion-card>
     <ion-card-header>
       <ion-card-title>
-        Agrtegue una nueva cita
+        Agregue una nueva cita
       </ion-card-title>
     </ion-card-header>
     <ion-card-content>
@@ -40,10 +40,10 @@
   </ion-card>
 
   <ion-list>
-    <app-cita-card 
-      *ngFor="let c of citas" 
-      [cita]="c" 
-      [puedeBorrar] = "true"
+    <app-cita-card
+      *ngFor="let c of citas"
+      [cita]="c"
+      [puedeBorrar]="true"
       (borrarCita)="eliminarCita(c.id!)">
     </app-cita-card>
   </ion-list>

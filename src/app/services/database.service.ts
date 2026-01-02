@@ -13,6 +13,11 @@ export class DatabaseService {
   constructor() {}
 
   async inicializarCarpeta(): Promise<void> {
+    // En web: no inicializamos SQLite real
+    if (this.platform === 'web') {
+      return;
+    }
+
     this.db = await this.sqLite.createConnection(
       'citas_db',
       false,
@@ -23,22 +28,31 @@ export class DatabaseService {
 
     await this.db.open();
 
-    const schema =`
+    const schema = `
       CREATE TABLE IF NOT EXISTS citas (
-      id INTEGER PRIMARY KEY AUTOINCREMENT,
-      frase TEXT NOT NULL,
-      autor TEXT NOT NULL
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        frase TEXT NOT NULL,
+        autor TEXT NOT NULL
       );
-      `;
-      await this.db.execute(schema);
+    `;
+    await this.db.execute(schema);
   }
 
   async ejecutarConsulta(sqlite: string, params: any[] = []) {
+    if (this.platform === 'web') {
+      // Modo dummy en navegador
+      return { changes: { changes: 0 } };
+    }
     return await this.db.run(sqlite, params);
   }
 
   async obtenerDatos(sqlite: string, params: any[] = []) {
+    if (this.platform === 'web') {
+      // Sin datos en navegador
+      return { values: [] };
+    }
     return await this.db.query(sqlite, params);
   }
-
 }
+
+

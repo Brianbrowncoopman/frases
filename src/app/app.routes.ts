@@ -8,14 +8,15 @@ export const routes: Routes = [
   },
   {
     path: 'inicio',
-    loadComponent: () => import('./pages/inicio/inicio.page').then( m => m.InicioPage)
+    loadComponent: () => import('./pages/inicio/inicio.page').then(m => m.InicioPage)
   },
   {
     path: 'gestion',
-    loadComponent: () => import('./pages/gestion/gestion.page').then( m => m.GestionPage)
+    loadComponent: () => import('./pages/gestion/gestion.page').then(m => m.GestionPage)
   },
   {
     path: 'configuracion',
-    loadComponent: () => import('./pages/configuracion/configuracion.page').then( m => m.ConfiguracionPage)
+    loadComponent: () => import('./pages/configuracion/configuracion.page').then(m => m.ConfiguracionPage)
   },
 ];
+

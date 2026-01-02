@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Preferences } from '@capacitor/preferences'; // Línea 2
+import { Preferences } from '@capacitor/preferences';
 
 @Injectable({
   providedIn: 'root'
@@ -7,9 +7,8 @@ import { Preferences } from '@capacitor/preferences'; // Línea 2
 export class ConfiguracionService {
   private readonly KEY_BORRAR_INICIO = 'permite_borrar_inicio';
 
-  constructor() { }
+  constructor() {}
 
-  // INDICADOR: Instala y codifica el uso del plugin de Preferencias 
   async guardarConfiguracionBorrado(valor: boolean) {
     await Preferences.set({
       key: this.KEY_BORRAR_INICIO,

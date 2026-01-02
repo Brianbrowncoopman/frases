@@ -1,51 +1,43 @@
 import { Injectable } from '@angular/core';
-import { Cita, Cita as CitaModel } from '../models/cita.model';
-import { DatabaseService } from './database.service';
-
+import { Cita } from '../models/cita.model';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CitaService {
-  //datos harcodeados para la fase inicial
-  /*private listaCitas: Cita[] = [
-    { id: 1, frase: 'La vida es bella', autor: 'Anónimo' },
-    { id: 2, frase: 'El conocimiento es poder', autor: 'Francis Bacon' },
-    { id: 3, frase: 'Carpe diem', autor: 'Horacio' },
-  ];*/
-  constructor(private dbService: DatabaseService) {}
-  /*getCitas(): Cita[] {
-    //return this._cita;
-    return this.listaCitas;;
-  }*/
+  private listaCitas: Cita[] = [];
+  private autoId = 1;
+
+  constructor() {
+    // Opcional: algunas citas de ejemplo
+    this.listaCitas = [
+      { id: this.autoId++, frase: 'La vida es bella', autor: 'Anónimo' },
+      { id: this.autoId++, frase: 'El conocimiento es poder', autor: 'Francis Bacon' },
+      { id: this.autoId++, frase: 'Carpe diem', autor: 'Horacio' },
+    ];
+  }
+
   async getCitas(): Promise<Cita[]> {
-    const res = await this.dbService.obtenerDatos('SELECT * FROM citas');
-    return  res.values || [];
+    return [...this.listaCitas];
   }
-  /*agregarCita(nuevaCita: Cita){
-    nuevaCita.id = Date.now();
-    this.listaCitas.push(nuevaCita);
-  }*/
-  async agregarCita(cita: Cita){
-    const sql = 'INSERT INTO citas (frase, autor) VALUES (?, ?)';
-    await this.dbService.ejecutarConsulta(sql, [cita.frase, cita.autor]);
+
+  async agregarCita(cita: Cita): Promise<void> {
+    cita.id = this.autoId++;
+    this.listaCitas.push(cita);
   }
-  /*eliminarCitas(id: number){
-    this.listaCitas = this.listaCitas.filter(C => C.id !== id)
-  }*/
-  async eliminarCita(id: number) {
-    const sql = 'DELETE FEOM cita WHERE id = ?';
-    await this.dbService.ejecutarConsulta(sql,[id]);
+
+  async eliminarCita(id: number): Promise<void> {
+    this.listaCitas = this.listaCitas.filter(c => c.id !== id);
   }
-  /*getCitaAleatoria():Cita {
+
+  async getCitaAleatoria(): Promise<Cita | null> {
+    if (this.listaCitas.length === 0) {
+      return null;
+    }
     const indice = Math.floor(Math.random() * this.listaCitas.length);
     return this.listaCitas[indice];
-  }*/
-  async getCitaAleatoria(): Promise<Cita | null> {
-    const sql = 'SELECT * FROM cita ORDER BY RANDOM() LIMIT 1';
-    const res =  await this.dbService.obtenerDatos(sql);
-    return res.values && res.values.length > 0 ? res.values[0] : null;
   }
 }
-export { Cita };
+
+
 

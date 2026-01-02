@@ -13,6 +13,9 @@ export class AppComponent {
   }
 
   async inicializaApp() {
-    await this.databaseService.inicializarCarpeta()
+    await this.databaseService.inicializarCarpeta();
   }
 }
+
+
+

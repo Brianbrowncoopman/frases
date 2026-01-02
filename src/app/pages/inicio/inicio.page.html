@@ -10,12 +10,12 @@
 </ion-header>
 
 <ion-content [fullscreen]="true" class="ion-padding">
-    <app-cita-card 
-      *ngIf="citaAleatoria" 
-      [cita]="citaAleatoria" 
-      [puedeBorrar]="puedeBorrarEnInicio"
-      (borrarCita)="eliminarCita()">
-    </app-cita-card>
+  <app-cita-card
+    *ngIf="citaAleatoria"
+    [cita]="citaAleatoria"
+    [puedeBorrar]="puedeBorrarEnInicio"
+    (borrarCita)="eliminarCita()">
+  </app-cita-card>
 
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">
     <ion-fab-button routerLink="/gestion">
@@ -23,3 +23,4 @@
     </ion-fab-button>
   </ion-fab>
 </ion-content>
+

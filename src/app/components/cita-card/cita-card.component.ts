@@ -10,24 +10,19 @@ import { CommonModule } from '@angular/common';
   standalone: true,
   imports: [IonicModule, CommonModule],
 })
-export class CitaCardComponent  implements OnInit {
+export class CitaCardComponent implements OnInit {
 
-  //recibe la info desde la pagina padre
   @Input() cita!: Cita;
-  @Input() puedeBorrar: boolean = true
+  @Input() puedeBorrar: boolean = true;
 
   @Output() borrarCita = new EventEmitter<void>();
 
-  /*notificarBorrado(){
-    this.borrarCita.emit();
-  }*/
-
-  constructor() { }
+  constructor() {}
 
   ngOnInit() {}
-  
+
   onEliminar() {
-  this.borrarCita.emit();
+    this.borrarCita.emit();
+  }
 }
 
-}
