@@ -1,7 +1,7 @@
-#container {
+/*#container {
   text-align: center;
 
-  position: absolute;
+  
   left: 0;
   right: 0;
   top: 50%;
@@ -24,4 +24,14 @@
 
 #container a {
   text-decoration: none;
+}*/
+
+
+ion-content {
+  --padding-start: 16px;
+  --padding-end: 16px;
+}
+
+.frase-estilo {
+  font-size: 18px;
 }

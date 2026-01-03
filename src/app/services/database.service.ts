@@ -6,19 +6,22 @@ import { Capacitor } from '@capacitor/core';
   providedIn: 'root'
 })
 export class DatabaseService {
-  private sqLite: SQLiteConnection = new SQLiteConnection(CapacitorSQLite);
-  private db!: SQLiteDBConnection;
-  private platform: string = Capacitor.getPlatform();
+  private sqlite: SQLiteConnection = new SQLiteConnection(CapacitorSQLite);
+  private db: SQLiteDBConnection | null = null;
+  private platform = Capacitor.getPlatform();
 
   constructor() {}
 
   async inicializarCarpeta(): Promise<void> {
-    // En web: no inicializamos SQLite real
     if (this.platform === 'web') {
       return;
     }
 
-    this.db = await this.sqLite.createConnection(
+    if (this.db) {
+      return;
+    }
+
+    this.db = await this.sqlite.createConnection(
       'citas_db',
       false,
       'no-encryption',
@@ -38,21 +41,29 @@ export class DatabaseService {
     await this.db.execute(schema);
   }
 
+  //  asegura que la conexión se abra si no lo está la base de datos
+  private async ensureDb() {
+    if (!this.db) {
+      await this.inicializarCarpeta();
+    }
+  }
+
   async ejecutarConsulta(sqlite: string, params: any[] = []) {
     if (this.platform === 'web') {
-      // Modo dummy en navegador
       return { changes: { changes: 0 } };
     }
-    return await this.db.run(sqlite, params);
+    await this.ensureDb();
+    return await this.db!.run(sqlite, params);
   }
 
   async obtenerDatos(sqlite: string, params: any[] = []) {
     if (this.platform === 'web') {
-      // Sin datos en navegador
       return { values: [] };
     }
-    return await this.db.query(sqlite, params);
+    await this.ensureDb();
+    return await this.db!.query(sqlite, params);
   }
 }
+
 
 

@@ -1,23 +1,70 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { IonicModule } from '@ionic/angular';
 import { FormBuilder, FormsModule, ReactiveFormsModule, FormGroup, Validators } from '@angular/forms';
 import { CitaService } from 'src/app/services/cita.service';
 import { Cita } from 'src/app/models/cita.model';
 import { CitaCardComponent } from 'src/app/components/cita-card/cita-card.component';
+
+
+import { 
+  IonHeader, 
+  IonToolbar, 
+  IonTitle, 
+  IonContent, 
+  IonList, 
+  IonItem, 
+  IonLabel, 
+  IonInput, 
+  IonButton, 
+  IonIcon,
+  IonButtons,    
+  IonBackButton,  
+  IonCard,        
+  IonCardHeader,  
+  IonCardTitle,   
+  IonCardContent, 
+  IonText         
+} from '@ionic/angular/standalone';
+
+import { addIcons } from 'ionicons';
+import { addOutline, trashOutline, saveOutline } from 'ionicons/icons';
 
 @Component({
   selector: 'app-gestion',
   templateUrl: './gestion.page.html',
   styleUrls: ['./gestion.page.scss'],
   standalone: true,
-  imports: [IonicModule, CommonModule, FormsModule, ReactiveFormsModule, CitaCardComponent]
+  imports: [
+    CommonModule, 
+    FormsModule, 
+    ReactiveFormsModule, 
+    CitaCardComponent,
+    IonHeader, 
+    IonToolbar, 
+    IonTitle, 
+    IonContent, 
+    IonList, 
+    IonItem, 
+    IonLabel, 
+    IonInput, 
+    IonButton, 
+    IonIcon,
+    IonButtons,      
+    IonBackButton,  
+    IonCard,        
+    IonCardHeader,  
+    IonCardTitle,   
+    IonCardContent, 
+    IonText         
+  ]
 })
 export class GestionPage implements OnInit {
   citaForm: FormGroup;
   citas: Cita[] = [];
 
   constructor(private fb: FormBuilder, private citaService: CitaService) {
+    addIcons({ addOutline, trashOutline, saveOutline });
+    
     this.citaForm = this.fb.group({
       frase: ['', [Validators.required, Validators.minLength(5)]],
       autor: ['', [Validators.required, Validators.minLength(2)]]
@@ -42,8 +89,10 @@ export class GestionPage implements OnInit {
   }
 
   async eliminarCita(id: number) {
-    await this.citaService.eliminarCita(id);
-    await this.listar();
+    if (id) {
+      await this.citaService.eliminarCita(id);
+      await this.listar();
+    }
   }
 }
 

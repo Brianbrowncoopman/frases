@@ -1,24 +1,42 @@
-<ion-header [translucent]="true">
+]
+<ion-header>
   <ion-toolbar>
-    <ion-title>Citas</ion-title>
-    <ion-buttons slot="end">
-      <ion-button routerLink="/configuracion">
-        <ion-icon slot="icon-only" name="settings-outline"></ion-icon>
+    <div class="toolbar-row">
+      <div class="toolbar-title">Citas</div>
+      <ion-button routerLink="/configuracion" color="primary">
+        <ion-icon slot="start" name="settings-outline"></ion-icon>
+        <ion-label>Config</ion-label>
       </ion-button>
-    </ion-buttons>
+    </div>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true" class="ion-padding">
-  <app-cita-card
-    *ngIf="citaAleatoria"
-    [cita]="citaAleatoria"
-    [puedeBorrar]="puedeBorrarEnInicio"
-    (borrarCita)="eliminarCita()">
-  </app-cita-card>
+<ion-content class="ion-padding">
+  <ng-container *ngIf="citaAleatoria; else sinCita">
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Cita del día</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <app-cita-card
+          [cita]="citaAleatoria"
+          [puedeBorrar]="puedeBorrarEnInicio"
+          (borrarCita)="eliminarCita()">
+        </app-cita-card>
+      </ion-card-content>
+    </ion-card>
+  </ng-container>
+
+  <ng-template #sinCita>
+    <ion-card>
+      <ion-card-content>
+        No hay citas guardadas.
+      </ion-card-content>
+    </ion-card>
+  </ng-template>
 
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-    <ion-fab-button routerLink="/gestion">
+    <ion-fab-button routerLink="/gestion" color="primary">
       <ion-icon name="add-outline"></ion-icon>
     </ion-fab-button>
   </ion-fab>

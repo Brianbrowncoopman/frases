@@ -1,35 +1,8 @@
-.cita-container {
-  padding: 20px;
-  text-align: center;
-}
-
-.frase-text {
-  font-style: italic;
-  color: #3880ff; /* Color azul similar al de la imagen */
-  font-size: 1.4rem;
-  margin-bottom: 15px;
-}
-
-.autor-text {
-  text-align: right;
-  font-weight: bold;
-  color: #222;
-}
-
-.footer-card {
-  display: flex;
-  justify-content: flex-end;
+ion-card {
+  margin-top: 16px;
 }
 
 .frase-estilo {
-  font-style: italic;
-  font-size: 1.1rem;
-  color: var(--ion-color-primary);
-  margin-bottom: 8px;
-}
-
-ion-note {
-  display: block;
-  text-align: right;
-  font-weight: bold;
+  font-size: 18px;
+  line-height: 1.4;
 }

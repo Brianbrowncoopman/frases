@@ -7,15 +7,15 @@ export const routes: Routes = [
     pathMatch: 'full',
   },
   {
-    path: 'inicio',
+    path: 'inicio', //ruta a la pagina de inicio
     loadComponent: () => import('./pages/inicio/inicio.page').then(m => m.InicioPage)
   },
   {
-    path: 'gestion',
+    path: 'gestion', //ruta a la pagina de gestion
     loadComponent: () => import('./pages/gestion/gestion.page').then(m => m.GestionPage)
   },
   {
-    path: 'configuracion',
+    path: 'configuracion', //ruta a la pagina de configuracion
     loadComponent: () => import('./pages/configuracion/configuracion.page').then(m => m.ConfiguracionPage)
   },
 ];

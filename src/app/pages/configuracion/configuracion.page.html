@@ -3,18 +3,15 @@
     <ion-buttons slot="start">
       <ion-back-button defaultHref="/inicio"></ion-back-button>
     </ion-buttons>
-    <ion-title>Configuraciones</ion-title>
+    <ion-title>Configuración</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content class="ion-padding">
   <ion-list>
-    <ion-item lines="full">
-      <ion-label>Permitir eliminar citas en el inicio</ion-label>
-      <ion-toggle
-        [(ngModel)]="permiteBorrar"
-        (ionChange)="actualizarAjuste()">
-      </ion-toggle>
+    <ion-item>
+      <ion-label>Permitir borrar citas en inicio</ion-label>
+      <ion-toggle [(ngModel)]="permitirBorrar" (ionChange)="actualizarConfiguracion()"></ion-toggle>
     </ion-item>
   </ion-list>
 </ion-content>
